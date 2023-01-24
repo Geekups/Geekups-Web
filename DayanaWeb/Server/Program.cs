@@ -1,4 +1,6 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using DayanaWeb.Shared.EntityFramework.Common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+// this code define my normal data context
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration
+        .GetConnectionString("IllConnection"));
+});
 
 var app = builder.Build();
 

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DayanaWeb.Shared.EntityFramework.Common;
 
 namespace DayanaWeb.Shared.EntityFramework.Entities.Blog;
-public class Post
+public class Post : BaseEntity
 {
     public string Name { get; set; }
 }
