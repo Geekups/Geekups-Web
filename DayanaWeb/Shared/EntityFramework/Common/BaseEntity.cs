@@ -10,7 +10,8 @@ public abstract class BaseEntity<T> : IBaseEntity
 
     // last changes datetime
     // map this shiit in your every create and update
-    public DateTime ModifiedDate { get; set; } = DateTime.Now;
+    public DateTime ModifiedDate { get; set; }
+
 }
 
 // this is defualt for id 

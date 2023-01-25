@@ -1,6 +1,5 @@
 using DayanaWeb.Shared.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
