@@ -5,35 +5,35 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DayanaWeb.Shared.EntityFramework.Repositories.Blog;
-public interface IPostRepository
+public interface IPostRepository : IRepository<Post>
 {
-        public Task AddPost(PostDto dto);
+    Task<Post> GetPostByIdAsync(int id);
+    Task<Post> GetPostByPostnameAsync(string Postname);
+    //Task<List<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter);
 }
 
-public class PostRepository : IPostRepository
+public class PostRepository : Repository<Post>, IPostRepository
 {
-    private DataContext _dataContext;
-    private DbSet<Post> _posts;
+    private readonly IQueryable<Post> _queryable;
 
-    public PostRepository(DataContext dataContext)
+    public PostRepository(DataContext context) : base(context)
     {
-        _dataContext = dataContext;
-        _posts = _dataContext.Set<Post>();
+        _queryable = DbContext.Set<Post>();
     }
 
-    public async Task AddPost(PostDto dto)
+    public Task<Post> GetPostByIdAsync(int id)
     {
-        var entity = new Post
-        {
-            Name = dto.Name,
-            ModifiedDate = dto.ModifiedDate,
-            CreateDate = dto.CreateDate,
-        };
-        await _posts.AddAsync(entity);
+        throw new NotImplementedException();
+    }
+
+    public Task<Post> GetPostByPostnameAsync(string Postname)
+    {
+        throw new NotImplementedException();
     }
 }
 
