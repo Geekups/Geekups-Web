@@ -11,7 +11,7 @@ public abstract class BaseEntity<T> : IBaseEntity
     // last changes datetime
     // map this shiit in your every create and update
     public DateTime ModifiedDate { get; set; }
-    public DateTime CreateDate { get; set; } 
+    public DateTime CreateDate { get; set; }
 }
 
 // this is defualt for id 

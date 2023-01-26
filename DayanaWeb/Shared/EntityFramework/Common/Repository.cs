@@ -1,14 +1,7 @@
-﻿using DayanaWeb.Shared.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DayanaWeb.Shared.EntityFramework.Repositories;
+namespace DayanaWeb.Shared.EntityFramework.Common;
 
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IBaseEntity
