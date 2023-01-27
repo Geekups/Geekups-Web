@@ -21,9 +21,15 @@ public class PostRepository : Repository<Post>, IPostRepository
         _queryable = DbContext.Set<Post>();
     }
 
-    public Task<Post> GetPostByIdAsync(int id)
+    public async Task<Post> GetPostByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var data = await _queryable
+    .SingleOrDefaultAsync(x => x.Id == id);
+
+        if (data == null)
+            throw new NullReferenceException(GenericErrors<PostCategory>.NotFoundError("id").ToString());
+
+        return data;
     }
 
     public Task<Post> GetPostByPostnameAsync(string Postname)
