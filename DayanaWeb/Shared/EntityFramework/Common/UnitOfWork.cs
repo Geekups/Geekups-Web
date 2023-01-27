@@ -8,14 +8,14 @@ public class UnitOfWork : IUnitOfWork
 
     public IPostRepository Posts { get; }
 
-    public Task<bool> CommitAsync()
+    public async Task<bool> CommitAsync()
     {
-        throw new NotImplementedException();
+        return await _context.SaveChangesAsync() > 0;
     }
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        _context.Dispose();
     }
 
     public UnitOfWork(DataContext context)
