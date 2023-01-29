@@ -4,6 +4,6 @@ namespace DayanaWeb.Shared.EntityFramework.DTO.Blog
 {
     public class PostDto : BaseDto
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = "undefined";
     }
 }
