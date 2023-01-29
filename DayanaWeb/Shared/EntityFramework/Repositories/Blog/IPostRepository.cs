@@ -1,6 +1,7 @@
 ﻿using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
+using DayanaWeb.Shared.EntityFramework.Extensions.Blog;
 using Microsoft.EntityFrameworkCore;
 
 namespace DayanaWeb.Shared.EntityFramework.Repositories.Blog;
@@ -31,21 +32,24 @@ public class PostRepository : Repository<Post>, IPostRepository
         return data;
     }
 
-    public Task<Post> GetPostByPostnameAsync(string Postname)
+    public async Task<Post> GetPostByPostnameAsync(string Postname)
     {
-        throw new NotImplementedException();
+        var data = await _queryable
+         .SingleOrDefaultAsync(x => x.Name.ToLower() == Postname.ToLower());
+
+        if (data == null)
+            throw new NullReferenceException(GenericErrors<Post>.NotFoundError("name").ToString());
+
+        return data;
     }
 
     public async Task<List<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter)
     {
         var query = _queryable;
-        // Filter By id
-        if (filter.Id.HasValue)
-            query = _queryable.Where(x => x.Id == filter.Id.Value);
+        query = query.AsNoTracking();
 
-        // Filter By Value
-        if (!string.IsNullOrEmpty(filter.StringValue))
-            query = query.Where(x => x.Name.ToLower().Contains(filter.StringValue.ToLower().Trim()));
+        query = query.ApplyFilter(filter);
+        query = query.ApplySort(filter.SortBy);
 
         return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
     }
