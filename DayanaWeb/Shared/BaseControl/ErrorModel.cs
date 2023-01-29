@@ -2,24 +2,21 @@
 
 public struct ErrorModel
 {
-    public ErrorModel(int code, string title, string[] messages)
+    public ErrorModel(int code, string title, string message)
     {
         Code = code;
         Title = title;
-
-        Messages = new List<string>();
-        Messages.AddRange(messages);
+        Message = message;
     }
 
     public readonly int Code;
     public readonly string Title;
-    public List<string> Messages;
+    public string Message;
 
     public ErrorModel Ready()
     {
-        var messages = new List<string>();
-        messages.AddRange(messages);
-        Messages = messages;
+        var message = "";
+        Message = message;
         return this;
     }
 }

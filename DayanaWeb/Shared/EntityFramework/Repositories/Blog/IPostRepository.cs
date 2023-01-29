@@ -27,7 +27,7 @@ public class PostRepository : Repository<Post>, IPostRepository
     .SingleOrDefaultAsync(x => x.Id == id);
 
         if (data == null)
-            throw new NullReferenceException(GenericErrors<PostCategory>.NotFoundError("id").ToString());
+            throw new NullReferenceException(GenericErrors<Post>.NotFoundError("id").ToString());
 
         return data;
     }
