@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DayanaWeb.Shared.BaseControl;
+﻿namespace DayanaWeb.Shared.BaseControl;
 public enum SortByEnum
 {
     CreationDate = 1,

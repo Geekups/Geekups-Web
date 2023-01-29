@@ -2,7 +2,6 @@
 using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DayanaWeb.Shared.EntityFramework.Repositories.Blog;
 public interface IPostRepository : IRepository<Post>
