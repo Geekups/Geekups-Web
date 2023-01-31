@@ -1,10 +1,5 @@
 ﻿using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DayanaWeb.Shared.EntityFramework.Extensions.Blog;
 public static class PostQueryableExtension

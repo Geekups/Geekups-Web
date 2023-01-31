@@ -39,7 +39,6 @@ public class PostRepository : Repository<Post>, IPostRepository
 
         if (data == null)
             throw new NullReferenceException(GenericErrors<Post>.NotFoundError("name").ToString());
-
         return data;
     }
 

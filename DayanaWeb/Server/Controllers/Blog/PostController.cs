@@ -1,8 +1,8 @@
-﻿using DayanaWeb.Shared.EntityFramework.Common;
+﻿using AutoMapper;
+using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
+using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using DayanaWeb.Shared.Infrastructure.Routes;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DayanaWeb.Server.Controllers.Blog;
@@ -10,15 +10,18 @@ namespace DayanaWeb.Server.Controllers.Blog;
 public class PostController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
-    public PostController(IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+    public PostController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    //[Route(Routes.Post + "add-post")]
-    //[HttpPost]
-    //public async HttpResponse AddPost([FromBody]PostDto postDto)
-    //{
-
-    //}
+    [Route(Routes.Post + "add-post")]
+    [HttpPost]
+    public async Task AddPost([FromBody] PostDto postDto)
+    {
+        var entity = _mapper.Map<Post>(postDto);
+        await _unitOfWork.Posts.AddAsync(entity);
+    }
 }
