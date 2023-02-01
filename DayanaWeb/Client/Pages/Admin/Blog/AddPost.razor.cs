@@ -5,11 +5,11 @@ namespace DayanaWeb.Client.Pages.Admin.Blog
 {
     public partial class AddPost
     {
-        public PostDto PostDtoData { get; set; }
+        PostDto postDto = new();
 
         public async Task AddNewPost()
         {
-            await _httpService.PostValue(Routes.Post + "add-post", PostDtoData);
+            await _httpService.PostValue(Routes.Post + "add-post", postDto);
         }
     }
 }

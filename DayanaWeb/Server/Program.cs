@@ -19,7 +19,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // register an HttpClient that points to itself
-builder.Services.AddSingleton(sp =>
+builder.Services.AddScoped(sp =>
 {
     // Get the address that the app is currently running at
     var server = sp.GetRequiredService<IServer>();
@@ -27,7 +27,8 @@ builder.Services.AddSingleton(sp =>
     var baseAddress = addressFeature.Addresses.First();
     return new HttpClient { BaseAddress = new Uri(baseAddress) };
 });
-builder.Services.AddSingleton<IHttpService, HttpService>();
+builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

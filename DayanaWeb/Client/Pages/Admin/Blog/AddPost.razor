@@ -1,5 +1,6 @@
 ﻿@page "/pa"
-<EditForm Model="PostDtoData" OnSubmit="() => AddNewPost()">
-    <InputText Value="PostDtoData.Name">
+<EditForm Model="postDto" OnSubmit="() => AddNewPost()">
+    <InputText @bind-Value="postDto.Name">
 </InputText>
+<button type="submit">dtrdtrddr</button>
 </EditForm>

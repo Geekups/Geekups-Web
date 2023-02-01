@@ -63,7 +63,7 @@ public class HttpService : IHttpService
         try
         {
             var serializedData = JsonSerializer.Serialize(data, _options);
-            var response = await _client.PostAsJsonAsync(requestUrl, serializedData);
+            var response = await _client.PostAsJsonAsync<string>(requestUrl, serializedData);
             Console.WriteLine(response);
             return response;
         }
