@@ -32,31 +32,37 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
     public void Add(TEntity entity)
     {
         DbContext.Set<TEntity>().Add(entity);
+        DbContext.SaveChanges();
     }
 
     public void AddRange(IEnumerable<TEntity> entities)
     {
         DbContext.Set<TEntity>().AddRange(entities);
+        DbContext.SaveChanges();
     }
 
     public void Remove(TEntity entity)
     {
         DbContext.Set<TEntity>().Remove(entity);
+        DbContext.SaveChanges();
     }
 
     public void RemoveRange(IEnumerable<TEntity> entities)
     {
         DbContext.Set<TEntity>().RemoveRange(entities);
+        DbContext.SaveChanges();
     }
 
     public void Update(TEntity entity)
     {
         DbContext.Set<TEntity>().Update(entity);
+        DbContext.SaveChanges();
     }
 
     public void UpdateRange(IEnumerable<TEntity> entities)
     {
         DbContext.Set<TEntity>().UpdateRange(entities);
+        DbContext.SaveChanges();
     }
 
     #endregion
@@ -66,11 +72,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
     public async Task AddAsync(TEntity entity)
     {
         await DbContext.Set<TEntity>().AddAsync(entity);
+        await DbContext.SaveChangesAsync();
     }
 
     public async Task AddRangeAsync(IEnumerable<TEntity> entities)
     {
         await DbContext.Set<TEntity>().AddRangeAsync(entities);
+        await DbContext.SaveChangesAsync();
     }
 
     #endregion

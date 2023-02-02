@@ -4,6 +4,7 @@ using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using DayanaWeb.Shared.Infrastructure.Routes;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace DayanaWeb.Server.Controllers.Blog;
 [ApiController]
@@ -19,9 +20,11 @@ public class PostController : ControllerBase
 
     [Route(Routes.Post + "add-post")]
     [HttpPost]
-    public async Task AddPost([FromBody] PostDto postDto)
+    public async Task AddPost([FromBody]string data)
     {
+        var postDto = JsonSerializer.Deserialize<PostDto>(data);   
         var entity = _mapper.Map<Post>(postDto);
         await _unitOfWork.Posts.AddAsync(entity);
+        var a = "b";
     }
 }
