@@ -25,6 +25,6 @@ public class PostController : ControllerBase
         var postDto = JsonSerializer.Deserialize<PostDto>(data);   
         var entity = _mapper.Map<Post>(postDto);
         await _unitOfWork.Posts.AddAsync(entity);
-        var a = "b";
+        await _unitOfWork.CommitAsync();
     }
 }
