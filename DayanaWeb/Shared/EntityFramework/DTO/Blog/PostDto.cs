@@ -8,6 +8,6 @@ public class PostDto : BaseDto
     public string Description { get; set; }
     public string Author { get; set; }
 
-    public int PostCategoryId { get; set; }
+    public long PostCategoryId { get; set; }
     public PostCategoryDto PostCategoryDto { get; set; } 
 }

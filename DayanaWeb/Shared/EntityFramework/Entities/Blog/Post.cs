@@ -10,7 +10,7 @@ public class Post : BaseEntity
     public string Description { get; set; }
     public string Author { get; set; }
 
-    public int PostCategoryId { get; set; }
+    public long PostCategoryId { get; set; }
     public PostCategory PostCategory { get; set; }
 }
 
@@ -30,6 +30,7 @@ public class PostEntityConfiguration : IEntityTypeConfiguration<Post>
 
         #endregion
 
-        builder.HasOne<PostCategory>().WithMany(x => x.Posts).HasForeignKey(x=>x.PostCategoryId);
+        builder.HasOne<PostCategory>().WithMany(x => x.Posts)
+            .HasForeignKey(x=>x.PostCategoryId).OnDelete(DeleteBehavior.NoAction);
     }
 }
