@@ -20,9 +20,9 @@ public class PostController : ControllerBase
 
     [Route(Routes.Post + "add-post")]
     [HttpPost]
-    public async Task AddPost([FromBody]string data)
+    public async Task AddPost([FromBody] string data)
     {
-        var postDto = JsonSerializer.Deserialize<PostDto>(data);   
+        var postDto = JsonSerializer.Deserialize<PostDto>(data);
         var entity = _mapper.Map<Post>(postDto);
         await _unitOfWork.Posts.AddAsync(entity);
         await _unitOfWork.CommitAsync();

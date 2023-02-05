@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DayanaWeb.Shared.Configs;
+﻿namespace DayanaWeb.Shared.Configs;
 
 public static class DefaultNumbers
 {

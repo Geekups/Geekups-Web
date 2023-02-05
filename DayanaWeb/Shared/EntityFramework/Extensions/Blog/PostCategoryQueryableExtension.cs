@@ -2,9 +2,10 @@
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 
 namespace DayanaWeb.Shared.EntityFramework.Extensions.Blog;
-public static class PostQueryableExtension
+
+public static class PostCategoryQueryableExtension
 {
-    public static IQueryable<Post> ApplyFilter(this IQueryable<Post> query, DefaultPaginationFilter filter)
+    public static IQueryable<PostCategory> ApplyFilter(this IQueryable<PostCategory> query, DefaultPaginationFilter filter)
     {
         // Filter By id
         if (filter.Id.HasValue)
@@ -17,7 +18,7 @@ public static class PostQueryableExtension
         return query;
     }
 
-    public static IQueryable<Post> ApplySort(this IQueryable<Post> query, SortByEnum? sortBy)
+    public static IQueryable<PostCategory> ApplySort(this IQueryable<PostCategory> query, SortByEnum? sortBy)
     {
         return sortBy switch
         {

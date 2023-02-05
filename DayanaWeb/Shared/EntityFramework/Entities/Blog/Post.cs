@@ -1,7 +1,7 @@
-﻿using DayanaWeb.Shared.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using DayanaWeb.Shared.Configs;
+using DayanaWeb.Shared.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
-using DayanaWeb.Shared.Configs;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayanaWeb.Shared.EntityFramework.Entities.Blog;
 public class Post : BaseEntity
@@ -31,6 +31,6 @@ public class PostEntityConfiguration : IEntityTypeConfiguration<Post>
         #endregion
 
         builder.HasOne<PostCategory>().WithMany(x => x.Posts)
-            .HasForeignKey(x=>x.PostCategoryId).OnDelete(DeleteBehavior.NoAction);
+            .HasForeignKey(x => x.PostCategoryId).OnDelete(DeleteBehavior.NoAction);
     }
 }

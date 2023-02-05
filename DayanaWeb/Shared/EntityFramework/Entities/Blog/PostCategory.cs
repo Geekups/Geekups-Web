@@ -1,12 +1,7 @@
-﻿using DayanaWeb.Shared.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using DayanaWeb.Shared.Configs;
+using DayanaWeb.Shared.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DayanaWeb.Shared.Configs;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayanaWeb.Shared.EntityFramework.Entities.Blog;
 public class PostCategory : BaseEntity
