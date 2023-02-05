@@ -2,13 +2,13 @@
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 
-namespace DayanaWeb.Shared.Configs
+namespace DayanaWeb.Shared.Configs;
+
+public class AutoMapperProfile : Profile
 {
-    public class AutoMapperProfile : Profile
+    public AutoMapperProfile()
     {
-        public AutoMapperProfile()
-        {
-            CreateMap<Post, PostDto>().ReverseMap();
-        }
+        CreateMap<Post, PostDto>().ReverseMap();
+        CreateMap<PostCategory, PostCategoryDto>().ReverseMap();
     }
 }

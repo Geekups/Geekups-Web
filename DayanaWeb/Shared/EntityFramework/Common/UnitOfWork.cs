@@ -7,6 +7,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly DataContext _context;
 
     public IPostRepository Posts { get; }
+    public IPostCategoryRepository PostCategories { get; }
 
     public async Task<bool> CommitAsync()
     {
@@ -22,5 +23,6 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
         Posts = new PostRepository(_context);
+        PostCategories = new PostCategoryRepository(_context);
     }
 }
