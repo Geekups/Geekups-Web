@@ -1,1 +1,9 @@
-﻿
+﻿@page "/apcat"
+
+<MudForm>
+    <MudTextField T="string" Label="Post Category Name" Required="true" RequiredError="pcn is required!"
+                  @bind-Value="model.Name"/>
+</MudForm>
+<MudButton @onclick="Add">
+    Add Cat
+</MudButton>
