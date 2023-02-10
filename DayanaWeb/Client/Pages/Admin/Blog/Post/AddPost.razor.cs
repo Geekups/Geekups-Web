@@ -10,7 +10,7 @@ public partial class AddPost
 
     protected override async Task OnInitializedAsync()
     {
-        categoryList = await _httpService.GetValueList<PostCategoryDto>(Routes.PostCategory);
+        categoryList = await _httpService.GetValueList<PostCategoryDto>(Routes.PostCategory + "add-post-category");
     }
 
     protected async Task Add()
