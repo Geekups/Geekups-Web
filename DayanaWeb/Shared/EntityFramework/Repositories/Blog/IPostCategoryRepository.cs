@@ -56,7 +56,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
     }
 
-    public async Task<List<PostCategory>> GetPostCategoriesAsync() 
+    public async Task<List<PostCategory>> GetPostCategoriesAsync()
     {
         return await _queryable.ToListAsync();
     }

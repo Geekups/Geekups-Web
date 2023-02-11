@@ -3,9 +3,7 @@ using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using DayanaWeb.Shared.Infrastructure.Routes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 using System.Text.Json;
 
 namespace DayanaWeb.Server.Controllers.Blog;
@@ -36,7 +34,7 @@ public class PostCategoryController : ControllerBase
     {
         var entityList = await _unitOfWork.PostCategories.GetPostCategoriesAsync();
         var dtoList = _mapper.Map<List<PostCategoryDto>>(entityList);
-         
+
         return dtoList;
     }
 }

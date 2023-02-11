@@ -1,13 +1,12 @@
 ﻿@page "/pa-ap-add-post"
-@using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 
 <MudContainer Class="object-center">
     <MudForm>
-        <MudSelect T="PostCategoryDto">
+        <MudSelect T="long" @bind-Value="categorySelectedValue" Label="please choose the category">
             @{
                 foreach (var pcd in categoryList)
                 {
-                    <MudSelectItem T="PostCategoryDto">@pcd.Name</MudSelectItem>
+                    <MudSelectItem T="long" Value="pcd.Id" >@pcd.Name</MudSelectItem>
                 }
             }
         </MudSelect>
