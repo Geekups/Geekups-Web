@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DayanaWeb.Shared.EntityFramework.Migrations
+namespace DayanaWeb.Shared.Migrations
 {
     /// <inheritdoc />
-    public partial class init0 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +22,6 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Icon = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -40,8 +40,8 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(800)", maxLength: 800, nullable: false),
                     Author = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostCategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    PostCategoryId1 = table.Column<long>(type: "bigint", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -54,13 +54,6 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
                         principalSchema: "dbo",
                         principalTable: "PostCategory",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Post_PostCategory_PostCategoryId1",
-                        column: x => x.PostCategoryId1,
-                        principalSchema: "dbo",
-                        principalTable: "PostCategory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -68,12 +61,6 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
                 schema: "dbo",
                 table: "Post",
                 column: "PostCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Post_PostCategoryId1",
-                schema: "dbo",
-                table: "Post",
-                column: "PostCategoryId1");
         }
 
         /// <inheritdoc />

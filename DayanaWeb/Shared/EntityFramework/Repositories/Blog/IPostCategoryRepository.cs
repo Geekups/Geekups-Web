@@ -9,8 +9,9 @@ namespace DayanaWeb.Shared.EntityFramework.Repositories.Blog;
 public interface IPostCategoryRepository : IRepository<PostCategory>
 {
     Task<PostCategory> GetPostCategoryByIdAsync(int id);
-    Task<PostCategory> GetPostCategoryByPostCategorynameAsync(string PostCategoryname);
-    Task<List<PostCategory>> GetPostCategorysByFilterAsync(DefaultPaginationFilter filter);
+    Task<PostCategory> GetPostCategoryByPostCategoryNameAsync(string PostCategoryname);
+    Task<List<PostCategory>> GetPostCategoriesByFilterAsync(DefaultPaginationFilter filter);
+    Task<List<PostCategory>> GetPostCategoriesAsync();
 }
 
 
@@ -34,7 +35,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         return data;
     }
 
-    public async Task<PostCategory> GetPostCategoryByPostCategorynameAsync(string PostCategoryname)
+    public async Task<PostCategory> GetPostCategoryByPostCategoryNameAsync(string PostCategoryname)
     {
         var data = await _queryable
          .SingleOrDefaultAsync(x => x.Name.ToLower() == PostCategoryname.ToLower());
@@ -44,7 +45,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         return data;
     }
 
-    public async Task<List<PostCategory>> GetPostCategorysByFilterAsync(DefaultPaginationFilter filter)
+    public async Task<List<PostCategory>> GetPostCategoriesByFilterAsync(DefaultPaginationFilter filter)
     {
         var query = _queryable;
         query = query.AsNoTracking();
@@ -53,6 +54,11 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         query = query.ApplySort(filter.SortBy);
 
         return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
+    }
+
+    public async Task<List<PostCategory>> GetPostCategoriesAsync()
+    {
+        return await _queryable.ToListAsync();
     }
 }
 
