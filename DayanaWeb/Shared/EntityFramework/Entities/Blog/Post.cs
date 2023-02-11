@@ -31,7 +31,7 @@ public class PostEntityConfiguration : IEntityTypeConfiguration<Post>
 
         #endregion
 
-        builder.HasOne<PostCategory>().WithMany(x => x.Posts)
+        builder.HasOne(x=>x.PostCategory).WithMany(x => x.Posts)
             .HasForeignKey(x => x.PostCategoryId).OnDelete(DeleteBehavior.NoAction);
     }
 }
