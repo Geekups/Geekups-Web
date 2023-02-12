@@ -9,7 +9,7 @@ namespace DayanaWeb.Shared.EntityFramework.Repositories.Blog;
 public interface IPostCategoryRepository : IRepository<PostCategory>
 {
     Task<PostCategory> GetPostCategoryByIdAsync(long id);
-    Task<PostCategory> GetPostCategoryByPostCategoryNameAsync(string PostCategoryname);
+    Task<PostCategory> GetPostCategoryByPostCategoryNameAsync(string PostCategoryName);
     Task<List<PostCategory>> GetPostCategoriesByFilterAsync(DefaultPaginationFilter filter);
     Task<List<PostCategory>> GetPostCategoriesAsync();
 }
@@ -35,10 +35,10 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         return data;
     }
 
-    public async Task<PostCategory> GetPostCategoryByPostCategoryNameAsync(string PostCategoryname)
+    public async Task<PostCategory> GetPostCategoryByPostCategoryNameAsync(string PostCategoryName)
     {
         var data = await _queryable
-         .SingleOrDefaultAsync(x => x.Name.ToLower() == PostCategoryname.ToLower());
+         .SingleOrDefaultAsync(x => x.Name.ToLower() == PostCategoryName.ToLower());
 
         if (data == null)
             throw new NullReferenceException(GenericErrors<PostCategory>.NotFoundError("name").ToString());
