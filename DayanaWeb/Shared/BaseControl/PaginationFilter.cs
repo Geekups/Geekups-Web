@@ -37,10 +37,10 @@ public record DefaultPaginationFilter : PaginationFilter
 }
 
 
-public record CustomaizedPaginationFilterOne<T1> : PaginationFilter
+public record CustomizedPaginationFilterOne<T1> : PaginationFilter
 {
-    public CustomaizedPaginationFilterOne(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
-    public CustomaizedPaginationFilterOne() { }
+    public CustomizedPaginationFilterOne(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
+    public CustomizedPaginationFilterOne() { }
 
     public string? Keyword { get; init; }
     public int? IntValue { get; init; }
@@ -56,10 +56,10 @@ public record CustomaizedPaginationFilterOne<T1> : PaginationFilter
 }
 
 
-public record CustomaizedPaginationFilterTwo<T1, T2> : PaginationFilter
+public record CustomizedPaginationFilterTwo<T1, T2> : PaginationFilter
 {
-    public CustomaizedPaginationFilterTwo(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
-    public CustomaizedPaginationFilterTwo() { }
+    public CustomizedPaginationFilterTwo(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
+    public CustomizedPaginationFilterTwo() { }
 
     public string? Keyword { get; init; }
     public int? IntValue { get; init; }
@@ -75,10 +75,10 @@ public record CustomaizedPaginationFilterTwo<T1, T2> : PaginationFilter
     public T2 Value2 { get; init; }
 }
 
-public record CustomaizedPaginationFilterThree<T1, T2, T3> : PaginationFilter
+public record CustomizedPaginationFilterThree<T1, T2, T3> : PaginationFilter
 {
-    public CustomaizedPaginationFilterThree(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
-    public CustomaizedPaginationFilterThree() { }
+    public CustomizedPaginationFilterThree(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
+    public CustomizedPaginationFilterThree() { }
 
     public string? Keyword { get; init; }
     public int? IntValue { get; init; }
@@ -96,10 +96,10 @@ public record CustomaizedPaginationFilterThree<T1, T2, T3> : PaginationFilter
 }
 
 
-public record CustomaizedPaginationFilterfour<T1, T2, T3, T4> : PaginationFilter
+public record CustomizedPaginationFilterfour<T1, T2, T3, T4> : PaginationFilter
 {
-    public CustomaizedPaginationFilterfour(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
-    public CustomaizedPaginationFilterfour() { }
+    public CustomizedPaginationFilterfour(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
+    public CustomizedPaginationFilterfour() { }
 
     public string? Keyword { get; init; }
     public int? IntValue { get; init; }
