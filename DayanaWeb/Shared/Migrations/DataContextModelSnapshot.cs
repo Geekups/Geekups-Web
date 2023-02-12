@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DayanaWeb.Shared.EntityFramework.Migrations
+namespace DayanaWeb.Shared.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -36,6 +36,10 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -55,14 +59,9 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
                     b.Property<long>("PostCategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("PostCategoryId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PostCategoryId");
-
-                    b.HasIndex("PostCategoryId1");
 
                     b.ToTable("Post", "dbo");
                 });
@@ -93,16 +92,10 @@ namespace DayanaWeb.Shared.EntityFramework.Migrations
 
             modelBuilder.Entity("DayanaWeb.Shared.EntityFramework.Entities.Blog.Post", b =>
                 {
-                    b.HasOne("DayanaWeb.Shared.EntityFramework.Entities.Blog.PostCategory", null)
+                    b.HasOne("DayanaWeb.Shared.EntityFramework.Entities.Blog.PostCategory", "PostCategory")
                         .WithMany("Posts")
                         .HasForeignKey("PostCategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DayanaWeb.Shared.EntityFramework.Entities.Blog.PostCategory", "PostCategory")
-                        .WithMany()
-                        .HasForeignKey("PostCategoryId1")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PostCategory");
