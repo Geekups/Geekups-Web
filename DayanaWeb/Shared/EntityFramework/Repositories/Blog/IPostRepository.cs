@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace DayanaWeb.Shared.EntityFramework.Repositories.Blog;
 public interface IPostRepository : IRepository<Post>
 {
-    Task<Post> GetPostByIdAsync(int id);
-    Task<Post> GetPostByPostnameAsync(string Postname);
+    Task<Post> GetPostByIdAsync(long id);
+    Task<Post> GetPostByPostNameAsync(string Postname);
     Task<List<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter);
 }
 
@@ -21,7 +21,7 @@ public class PostRepository : Repository<Post>, IPostRepository
         _queryable = DbContext.Set<Post>();
     }
 
-    public async Task<Post> GetPostByIdAsync(int id)
+    public async Task<Post> GetPostByIdAsync(long id)
     {
         var data = await _queryable
     .SingleOrDefaultAsync(x => x.Id == id);
@@ -32,7 +32,7 @@ public class PostRepository : Repository<Post>, IPostRepository
         return data;
     }
 
-    public async Task<Post> GetPostByPostnameAsync(string Postname)
+    public async Task<Post> GetPostByPostNameAsync(string Postname)
     {
         var data = await _queryable
          .SingleOrDefaultAsync(x => x.Name.ToLower() == Postname.ToLower());

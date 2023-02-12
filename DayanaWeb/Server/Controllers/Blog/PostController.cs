@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
@@ -28,4 +29,39 @@ public class PostController : ControllerBase
         await _unitOfWork.CommitAsync();
     }
 
+    [Route(Routes.Post + "get-post/{data}")]
+    [HttpGet]
+    public async Task<PostDto> GetPost([FromRoute] long data)
+    {
+        var entity = await _unitOfWork.Posts.GetPostByIdAsync(data);
+        var dto = _mapper.Map<PostDto>(entity);
+        return dto;
+    }
+
+    [Route(Routes.Post + "get-post-list-by-filter")]
+    [HttpGet]
+    public async Task<List<PostDto>> GetPostListByFilter([FromBody] DefaultPaginationFilter data)
+    {
+        var entityList = await _unitOfWork.Posts.GetPostsByFilterAsync(data);
+        var dtoList = _mapper.Map<List<PostDto>>(entityList);
+        return dtoList;
+    }
+
+    [Route(Routes.Post + "delete-post/{data}")]
+    [HttpDelete]
+    public async Task DeletePost([FromRoute] long data)
+    {
+        var entity = await _unitOfWork.Posts.GetPostByIdAsync(data);
+        _unitOfWork.Posts.Remove(entity);
+        await _unitOfWork.CommitAsync();
+    }
+
+    [Route(Routes.Post + "update-post")]
+    [HttpPut]
+    public async Task UpdatePost([FromBody] PostDto data)
+    {
+        var entity = _mapper.Map<Post>(data);
+        _unitOfWork.Posts.Update(entity);
+        await _unitOfWork.CommitAsync();
+    }
 }
