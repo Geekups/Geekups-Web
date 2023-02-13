@@ -49,7 +49,7 @@ public class PostCategoryController : ControllerBase
     }
 
     [Route(Routes.PostCategory + "get-post-category-list-by-filter")]
-    [HttpGet]
+    [HttpPost]
     public async Task<List<PostCategoryDto>> GetPostCategoryListByFilter([FromBody] DefaultPaginationFilter data)
     {
         var entityList = await _unitOfWork.PostCategories.GetPostCategoriesByFilterAsync(data);

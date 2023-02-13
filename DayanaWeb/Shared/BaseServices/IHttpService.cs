@@ -11,7 +11,7 @@ public interface IHttpService
     Task<HttpResponseMessage> PutValue<T>(string requestUrl, T data);
     //Task<HttpResponseMessage> PatchValue<T>(string requestUrl, T data);
     Task<HttpResponseMessage> DeleteValue<T>(string requestUrl);
-    Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl);
+    Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl, DefaultPaginationFilter defaultPaginationFilter);
 }
 
 public class HttpService : IHttpService
@@ -58,7 +58,7 @@ public class HttpService : IHttpService
         try
         {
             var serializedData = JsonSerializer.Serialize(data, _options);
-            var response = await _client.PostAsJsonAsync<string>(requestUrl, serializedData);
+            var response = await _client.PostAsJsonAsync(requestUrl, serializedData);
             Console.WriteLine(response);
             return response;
         }
@@ -88,9 +88,9 @@ public class HttpService : IHttpService
 
     #region Pagination
 
-    public async Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl)
+    public async Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl, DefaultPaginationFilter defaultPaginationFilter)
     {
-        var response = await _client.GetAsync(requestUrl);
+        var response = await _client.PostAsJsonAsync(requestUrl, defaultPaginationFilter);
         var dataAsJson = await response.Content.ReadAsStreamAsync();
         var dataList = await JsonSerializer.DeserializeAsync<List<T>>(dataAsJson);
         if (dataList == null)
