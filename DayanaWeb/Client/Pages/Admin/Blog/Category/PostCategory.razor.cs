@@ -7,7 +7,7 @@ namespace DayanaWeb.Client.Pages.Admin.Blog.Category;
 public partial class PostCategory
 {
     List<PostCategoryDto> model = new();
-    DefaultPaginationFilter paginationFilter = new();
+    DefaultPaginationFilter paginationFilter = new(1,10);
     protected override async Task OnInitializedAsync()
     {
         var paginatedList = await _httpService.GetPagedValue<PostCategoryDto>(Routes.PostCategory + "get-post-category-list-by-filter",paginationFilter);

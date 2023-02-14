@@ -52,8 +52,8 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
 
         query = query.ApplyFilter(filter);
         query = query.ApplySort(filter.SortBy);
-
-        return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
+        var aa = await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
+        return aa;
     }
 
     public async Task<List<PostCategory>> GetPostCategoriesAsync()

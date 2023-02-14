@@ -90,7 +90,8 @@ public class HttpService : IHttpService
 
     public async Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl, DefaultPaginationFilter defaultPaginationFilter)
     {
-        var response = await _client.PostAsJsonAsync(requestUrl, defaultPaginationFilter);
+        var serializedData = JsonSerializer.Serialize(defaultPaginationFilter, _options);
+        var response = await _client.PostAsJsonAsync(requestUrl, serializedData);
         var dataAsJson = await response.Content.ReadAsStreamAsync();
         var dataList = await JsonSerializer.DeserializeAsync<List<T>>(dataAsJson);
         if (dataList == null)
