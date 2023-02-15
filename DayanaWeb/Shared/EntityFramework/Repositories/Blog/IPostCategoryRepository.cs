@@ -52,13 +52,19 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
 
         query = query.ApplyFilter(filter);
         query = query.ApplySort(filter.SortBy);
-        var aa = await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
-        return aa;
+        return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
     }
 
     public async Task<List<PostCategory>> GetPostCategoriesAsync()
     {
         return await _queryable.ToListAsync();
+    }
+
+    // play ground
+    public IEnumerable<PostCategory> GetPostCategories()
+    {
+        IEnumerable<PostCategory> enumerable = _queryable.AsEnumerable();
+        yield return (PostCategory)enumerable;
     }
 }
 
