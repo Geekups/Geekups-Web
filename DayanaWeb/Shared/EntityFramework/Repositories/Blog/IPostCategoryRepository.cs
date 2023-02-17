@@ -56,7 +56,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         {
             Data = await query.Paginate(filter.Page, filter.PageSize).ToListAsync(),
             TotalCount = dataTotalCount,
-            TotalPages = (int)Math.Ceiling((decimal)(dataTotalCount / filter.PageSize)),
+            TotalPages = (int)Math.Ceiling((decimal)dataTotalCount / (decimal)filter.PageSize),
             Page = filter.Page,
             PageSize = filter.PageSize
         };
