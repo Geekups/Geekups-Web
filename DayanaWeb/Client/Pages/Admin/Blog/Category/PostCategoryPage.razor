@@ -1,6 +1,6 @@
 ﻿@page "/post-cat-control-EDSEWHD"
 <MudContainer Class="object-center">
-    <MudTable Items="@model">
+    <MudTable @ref="@_table" Items="@_elements" TotalItems="_totalItems">
         <HeaderContent>
             <MudTh>Category Name</MudTh>
         </HeaderContent>
@@ -9,8 +9,8 @@
         </RowTemplate>
         <PagerContent>
             <div class="d-flex flex-column align-center">
-                <MudPagination ShowFirstButton="true" ShowLastButton="true" Selected="_selectedPage"
-                 SelectedChanged="(() => ChangePageAsync())"  Count="@paginationData.TotalPages" Class="mt-4" />
+                <MudPagination ShowFirstButton="true" ShowLastButton="true" SelectedChanged="PageChanged"
+                   Count="@paginationData.TotalPages" Class="mt-4 pa-4" />
             </div>
         </PagerContent>
     </MudTable>
