@@ -1,9 +1,7 @@
 ﻿using DayanaWeb.Shared.BaseControl;
-using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using DayanaWeb.Shared.Infrastructure.Routes;
 using MudBlazor;
-using static MudBlazor.CategoryTypes;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Category;
 
@@ -34,5 +32,6 @@ public partial class PostCategoryPage
     {
         _elements = (await GetPaginatedListAsync(i)).Data;
         _table.NavigateTo(i);
+        //await _table.ReloadServerData();
     }
 }
