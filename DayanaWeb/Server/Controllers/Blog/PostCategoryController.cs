@@ -53,7 +53,7 @@ public class PostCategoryController : ControllerBase
     public async Task<PaginatedList<PostCategory>> GetPostCategoryListByFilter([FromBody] string data)
     {
         var paginationData = JsonSerializer.Deserialize<DefaultPaginationFilter>(data);
-        return await _unitOfWork.PostCategories.GetPostCategoriesByFilterAsync(paginationData ?? throw new NullReferenceException(CustomError<DefaultPaginationFilter>.NullRefError().ToString()));
+        return await _unitOfWork.PostCategories.GetPostCategoriesByFilterAsync(paginationData ?? throw new NullReferenceException(CustomizedError<DefaultPaginationFilter>.NullRefError().ToString()));
     }
 
     [Route(Routes.PostCategory + "delete-post-category/{data}")]

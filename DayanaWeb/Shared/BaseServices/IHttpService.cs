@@ -92,11 +92,9 @@ public class HttpService : IHttpService
         var serializedData = JsonSerializer.Serialize(defaultPaginationFilter, _options);
         var response = await _client.PostAsJsonAsync(requestUrl, serializedData);
         var dataAsJson = await response.Content.ReadAsStreamAsync();
-        var dataList = await JsonSerializer.DeserializeAsync<List<T>>(dataAsJson, _options);
-        if (dataList == null)
-            throw new NullReferenceException("there is not any data here, add some data man!!");
+        var data = await JsonSerializer.DeserializeAsync<PaginatedList<T>>(dataAsJson, _options);
 
-        return new PaginatedList<T>() { Data = dataList, TotalCount = dataList.Count };
+        return data ?? throw new NullReferenceException(CustomizedError<T>.NullRefError().ToString());
     }
 
     #endregion

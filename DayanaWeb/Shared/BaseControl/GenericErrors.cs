@@ -30,7 +30,7 @@ public static class GenericErrors<TEntity> where TEntity : class, IBaseEntity
  message: $"object: '{nameof(TEntity)}' | with this '{variableName.ToLower()}' already exists | \n ");
 }
 
-public static class CustomError<T>
+public static class CustomizedError<T>
 {
     public static ErrorModel NullRefError() => new(
     code: 13,
