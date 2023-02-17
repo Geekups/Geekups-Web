@@ -50,12 +50,10 @@ public class PostCategoryController : ControllerBase
 
     [Route(Routes.PostCategory + "get-post-category-list-by-filter")]
     [HttpPost]
-    public async Task<List<PostCategoryDto>> GetPostCategoryListByFilter([FromBody] string data)
+    public async Task<PaginatedList<PostCategory>> GetPostCategoryListByFilter([FromBody] string data)
     {
         var paginationData = JsonSerializer.Deserialize<DefaultPaginationFilter>(data);
-        var entityList = await _unitOfWork.PostCategories.GetPostCategoriesByFilterAsync(paginationData);
-        var dtoList = _mapper.Map<List<PostCategoryDto>>(entityList);
-        return dtoList;
+        return await _unitOfWork.PostCategories.GetPostCategoriesByFilterAsync(paginationData ?? throw new NullReferenceException(CustomError<DefaultPaginationFilter>.NullRefError().ToString()));
     }
 
     [Route(Routes.PostCategory + "delete-post-category/{data}")]
