@@ -1,11 +1,16 @@
 ﻿@page "/post-cat-control-EDSEWHD"
 <MudContainer Class="object-center">
-    <MudTable Items="@model" Loading="true">
+    <MudTable Items="@model">
         <HeaderContent>
             <MudTh>Category Name</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Category Name">@context.Name</MudTd>
         </RowTemplate>
+        <PagerContent>
+            <div class="d-flex flex-column align-center">
+                <MudPagination ShowFirstButton="true" ShowLastButton="true" Count="11" Class="mt-4" />
+            </div>
+        </PagerContent>
     </MudTable>
 </MudContainer>

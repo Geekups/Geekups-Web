@@ -40,9 +40,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         var data = await _queryable
          .SingleOrDefaultAsync(x => x.Name.ToLower() == PostCategoryName.ToLower());
 
-        if (data == null)
-            throw new NullReferenceException(GenericErrors<PostCategory>.NotFoundError("name").ToString());
-        return data;
+        return data == null ? throw new NullReferenceException(GenericErrors<PostCategory>.NotFoundError("name").ToString()) : data;
     }
 
     public async Task<List<PostCategory>> GetPostCategoriesByFilterAsync(DefaultPaginationFilter filter)
@@ -52,6 +50,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
 
         query = query.ApplyFilter(filter);
         query = query.ApplySort(filter.SortBy);
+        var totalPageCount = (int)Math.Ceiling((decimal)(_queryable.Count() / filter.PageSize));
         return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
     }
 
