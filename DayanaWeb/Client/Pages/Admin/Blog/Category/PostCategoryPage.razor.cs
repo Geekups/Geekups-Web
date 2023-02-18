@@ -30,8 +30,12 @@ public partial class PostCategoryPage
 
     private async void PageChanged(int i)
     {
-        _elements = (await GetPaginatedListAsync(i)).Data;
         _table.NavigateTo(i);
-        //await _table.ReloadServerData();
+        
+        var aa = await GetPaginatedListAsync(_selectedPage);
+        _selectedPage = i;
+        _elements = aa.Data;
+        
+        await _table.ReloadServerData();
     }
 }
