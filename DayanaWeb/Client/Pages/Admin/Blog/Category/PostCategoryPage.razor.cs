@@ -1,41 +1,34 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using MudBlazor;
+using static MudBlazor.CategoryTypes;
+using System.Net.Http;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.Infrastructure.Routes;
-using MudBlazor;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Category;
 
 public partial class PostCategoryPage
 {
-    MudTable<PostCategory> _table = new();
-    private IEnumerable<PostCategory> _elements = new List<PostCategory>();
-    int _totalItems = 0;
+    private IEnumerable<PostCategory> pagedData;
+    private MudTable<PostCategory> table;
 
-    int _selectedPage = 1;
-    PaginatedList<PostCategory> paginationData = new();
+    private int totalItems;
+    private string searchString = null;
 
-    protected override async Task OnInitializedAsync()
+    /// <summary>
+    /// Here we simulate getting the paged, filtered and ordered data from the server
+    /// </summary>
+    private async Task<TableData<PostCategory>> ServerReload(TableState state)
     {
-        var paginatedList = await GetPaginatedListAsync(_selectedPage);
-        paginationData = paginatedList;
-        _elements = paginatedList.Data;
-        _totalItems = paginatedList.TotalCount;
+        DefaultPaginationFilter paginationFilter = new(state.Page, state.PageSize);
+        var paginatedData = await _httpService.GetPagedValue<PostCategory>(Routes.PostCategory + "get-post-category-list-by-filter", paginationFilter);
+        pagedData = paginatedData.Data;
+        return new TableData<PostCategory>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
 
-    private async Task<PaginatedList<PostCategory>> GetPaginatedListAsync(int selectedPage)
+    private void OnSearch(string text)
     {
-        DefaultPaginationFilter paginationFilter = new(selectedPage, 10);
-        return await _httpService.GetPagedValue<PostCategory>(Routes.PostCategory + "get-post-category-list-by-filter", paginationFilter);
-    }
-
-    private async void PageChanged(int i)
-    {
-        _table.NavigateTo(i);
-        
-        var aa = await GetPaginatedListAsync(_selectedPage);
-        _selectedPage = i;
-        _elements = aa.Data;
-        
-        await _table.ReloadServerData();
+        searchString = text;
+        table.ReloadServerData();
     }
 }
