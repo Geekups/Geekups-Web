@@ -29,3 +29,11 @@ public static class GenericErrors<TEntity> where TEntity : class, IBaseEntity
  title: $"{nameof(TEntity)} Error",
  message: $"object: '{nameof(TEntity)}' | with this '{variableName.ToLower()}' already exists | \n ");
 }
+
+public static class CustomizedError<T>
+{
+    public static ErrorModel NullRefError() => new(
+    code: 13,
+    title: $"{nameof(T)} Error",
+    message: $"object: '{nameof(T)}' | Is Null | \n ");
+}

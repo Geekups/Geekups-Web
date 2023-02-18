@@ -1,6 +1,6 @@
 ﻿namespace DayanaWeb.Shared.BaseControl;
 
-public record PaginationFilter
+public class PaginationFilter
 {
     private const int MinPageNumber = 1;
     private const int MaxPageSize = 200;
@@ -15,104 +15,105 @@ public record PaginationFilter
     {
     }
 
-    public int Page { get; }
-    public int PageSize { get; }
+    public int Page { get; set; } 
+    public int PageSize { get; set; }
+    public int TotalPageCount { get; set; }
 }
 
-public record DefaultPaginationFilter : PaginationFilter
+public class DefaultPaginationFilter : PaginationFilter
 {
     public DefaultPaginationFilter(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
     public DefaultPaginationFilter() { }
 
-    public string? Keyword { get; init; }
-    public int? IntValue { get; init; }
-    public string? StringValue { get; init; }
-    public IEnumerable<int>? IntValueList { get; init; }
-    public IEnumerable<int>? StringValueList { get; init; }
-    public int? CategoryId { get; init; }
-    public int? Id { get; init; }
-    public string? Name { get; init; }
-    public string? Title { get; init; }
-    public SortByEnum? SortBy { get; init; }
+    public string? Keyword { get; set; }
+    public int? IntValue { get; set; }
+    public string? StringValue { get; set; }
+    public IEnumerable<int>? IntValueList { get; set; }
+    public IEnumerable<int>? StringValueList { get; set; }
+    public int? CategoryId { get; set; }
+    public int? Id { get; set; }
+    public string? Name { get; set; }
+    public string? Title { get; set; }
+    public SortByEnum? SortBy { get; set; }
 }
 
 
-public record CustomizedPaginationFilterOne<T1> : PaginationFilter
+public class CustomizedPaginationFilterOne<T1> : PaginationFilter
 {
     public CustomizedPaginationFilterOne(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
     public CustomizedPaginationFilterOne() { }
 
-    public string? Keyword { get; init; }
-    public int? IntValue { get; init; }
-    public string? StringValue { get; init; }
-    public IEnumerable<int>? IntValueList { get; init; }
-    public IEnumerable<int>? StringValueList { get; init; }
-    public int? CategoryId { get; init; }
-    public int? Id { get; init; }
-    public string? Name { get; init; }
-    public string? Title { get; init; }
-    public SortByEnum? SortBy { get; init; }
-    public T1 Value1 { get; init; }
+    public string? Keyword { get; set; }
+    public int? IntValue { get; set; }
+    public string? StringValue { get; set; }
+    public IEnumerable<int>? IntValueList { get; set; }
+    public IEnumerable<int>? StringValueList { get; set; }
+    public int? CategoryId { get; set; }
+    public int? Id { get; set; }
+    public string? Name { get; set; }
+    public string? Title { get; set; }
+    public SortByEnum? SortBy { get; set; }
+    public T1 Value1 { get; set; }
 }
 
 
-public record CustomizedPaginationFilterTwo<T1, T2> : PaginationFilter
+public class CustomizedPaginationFilterTwo<T1, T2> : PaginationFilter
 {
     public CustomizedPaginationFilterTwo(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
     public CustomizedPaginationFilterTwo() { }
 
-    public string? Keyword { get; init; }
-    public int? IntValue { get; init; }
-    public string? StringValue { get; init; }
-    public IEnumerable<int>? IntValueList { get; init; }
-    public IEnumerable<int>? StringValueList { get; init; }
-    public int? CategoryId { get; init; }
-    public int? Id { get; init; }
-    public string? Name { get; init; }
-    public string? Title { get; init; }
-    public SortByEnum? SortBy { get; init; }
-    public T1 Value1 { get; init; }
-    public T2 Value2 { get; init; }
+    public string? Keyword { get; set; }
+    public int? IntValue { get; set; }
+    public string? StringValue { get; set; }
+    public IEnumerable<int>? IntValueList { get; set; }
+    public IEnumerable<int>? StringValueList { get; set; }
+    public int? CategoryId { get; set; }
+    public int? Id { get; set; }
+    public string? Name { get; set; }
+    public string? Title { get; set; }
+    public SortByEnum? SortBy { get; set; }
+    public T1 Value1 { get; set; }
+    public T2 Value2 { get; set; }
 }
 
-public record CustomizedPaginationFilterThree<T1, T2, T3> : PaginationFilter
+public class CustomizedPaginationFilterThree<T1, T2, T3> : PaginationFilter
 {
     public CustomizedPaginationFilterThree(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
     public CustomizedPaginationFilterThree() { }
 
-    public string? Keyword { get; init; }
-    public int? IntValue { get; init; }
-    public string? StringValue { get; init; }
-    public IEnumerable<int>? IntValueList { get; init; }
-    public IEnumerable<int>? StringValueList { get; init; }
-    public int? CategoryId { get; init; }
-    public int? Id { get; init; }
-    public string? Name { get; init; }
-    public string? Title { get; init; }
-    public SortByEnum? SortBy { get; init; }
-    public T1 Value1 { get; init; }
-    public T2 Value2 { get; init; }
-    public T3 Valu32 { get; init; }
+    public string? Keyword { get; set; }
+    public int? IntValue { get; set; }
+    public string? StringValue { get; set; }
+    public IEnumerable<int>? IntValueList { get; set; }
+    public IEnumerable<int>? StringValueList { get; set; }
+    public int? CategoryId { get; set; }
+    public int? Id { get; set; }
+    public string? Name { get; set; }
+    public string? Title { get; set; }
+    public SortByEnum? SortBy { get; set; }
+    public T1 Value1 { get; set; }
+    public T2 Value2 { get; set; }
+    public T3 Valu32 { get; set; }
 }
 
 
-public record CustomizedPaginationFilterfour<T1, T2, T3, T4> : PaginationFilter
+public class CustomizedPaginationFilterfour<T1, T2, T3, T4> : PaginationFilter
 {
     public CustomizedPaginationFilterfour(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
     public CustomizedPaginationFilterfour() { }
 
-    public string? Keyword { get; init; }
-    public int? IntValue { get; init; }
-    public string? StringValue { get; init; }
-    public IEnumerable<int>? IntValueList { get; init; }
-    public IEnumerable<int>? StringValueList { get; init; }
-    public int? CategoryId { get; init; }
-    public int? Id { get; init; }
-    public string? Name { get; init; }
-    public string? Title { get; init; }
-    public SortByEnum? SortBy { get; init; }
-    public T1 Value1 { get; init; }
-    public T2 Value2 { get; init; }
-    public T3 Valu3 { get; init; }
-    public T4 Value4 { get; init; }
+    public string? Keyword { get; set; }
+    public int? IntValue { get; set; }
+    public string? StringValue { get; set; }
+    public IEnumerable<int>? IntValueList { get; set; }
+    public IEnumerable<int>? StringValueList { get; set; }
+    public int? CategoryId { get; set; }
+    public int? Id { get; set; }
+    public string? Name { get; set; }
+    public string? Title { get; set; }
+    public SortByEnum? SortBy { get; set; }
+    public T1 Value1 { get; set; }
+    public T2 Value2 { get; set; }
+    public T3 Valu3 { get; set; }
+    public T4 Value4 { get; set; }
 }
