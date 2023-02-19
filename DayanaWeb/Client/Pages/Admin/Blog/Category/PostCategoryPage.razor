@@ -1,7 +1,8 @@
 ﻿@page "/post-cat-control-EDSEWHD"
 @using DayanaWeb.Shared.EntityFramework.Entities.Blog;
-<MudTable ServerData="@(new Func<TableState, Task<TableData<PostCategory>>>(ServerReload))"
-          Dense="true" Hover="true" @ref="table">
+<MudTable ServerData="@(new Func<TableState, Task<TableData<PostCategory>>>(ServerReload))" ReadOnly="false" CommitEditTooltip="Commit Edit"
+          Dense="true" Hover="true" @ref="table" Bordered="true" @bind-SelectedItem="selectedItem" EditTrigger="TableEditTrigger.EditButton"
+          OnCommitEditClick="@(() => OnCommitEdit())" >
     <ToolBarContent>
         <MudText Typo="Typo.h6">Post Category</MudText>
         <MudSpacer />
@@ -21,4 +22,7 @@
     <PagerContent>
         <MudTablePager />
     </PagerContent>
+    <EditButtonContent Context="button">
+        <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit"  />
+    </EditButtonContent>
 </MudTable>
