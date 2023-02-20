@@ -39,4 +39,9 @@ public partial class PostCategoryPage
         searchString = text;
         table.ReloadServerData();
     }
+
+    private void Edit(long id)
+    {
+        _navigationManager.NavigateTo($"/cp-pc-edit/{id}");
+    }
 }
