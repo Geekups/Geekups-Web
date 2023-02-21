@@ -11,12 +11,12 @@ public partial class PostCategoryPage
 {
     private IEnumerable<PostCategory> pagedData;
     private MudTable<PostCategory> table;
-
-    private int totalItems;
-    private string searchString = null;
+    private string searchString = "";
+    private PostCategory selectedItem = null;
+    
 
     /// <summary>
-    /// Here we simulate getting the paged, filtered and ordered data from the server
+    /// getting the paged, filtered and ordered data from the server
     /// </summary>
     private async Task<TableData<PostCategory>> ServerReload(TableState state)
     {
@@ -26,9 +26,22 @@ public partial class PostCategoryPage
         return new TableData<PostCategory>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
 
+    private async Task OnCommitEdit()
+    {
+        await _httpService.PutValue(Routes.PostCategory + "", selectedItem);
+    }
+    private async Task OnDelete(long id)
+    {
+        await _httpService.DeleteValue<PostCategory>(Routes.PostCategory + $"delete-post-category/{id}");
+    }
     private void OnSearch(string text)
     {
         searchString = text;
         table.ReloadServerData();
+    }
+
+    private void Edit(long id)
+    {
+        _navigationManager.NavigateTo($"/cp-pc-edit/{id}");
     }
 }
