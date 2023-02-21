@@ -67,9 +67,10 @@ public class PostCategoryController : ControllerBase
 
     [Route(Routes.PostCategory + "update-post-category")]
     [HttpPut]
-    public async Task UpdatePostCategory([FromBody] PostCategoryDto data)
+    public async Task UpdatePostCategory([FromBody] string data)
     {
-        var entity = _mapper.Map<PostCategory>(data);
+        var dto = JsonSerializer.Deserialize<PostCategoryDto>(data);
+        var entity = _mapper.Map<PostCategory>(dto);
         _unitOfWork.PostCategories.Update(entity);
         await _unitOfWork.CommitAsync();
     }
