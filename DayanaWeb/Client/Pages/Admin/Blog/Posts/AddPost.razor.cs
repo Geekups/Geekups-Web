@@ -1,13 +1,13 @@
-﻿using DayanaWeb.Shared.EntityFramework.DTO.Blog;
-using DayanaWeb.Shared.Infrastructure.Routes;
+﻿using DayanaWeb.Shared.BaseControl;
+using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 
-namespace DayanaWeb.Client.Pages.Admin.Blog.Post;
+namespace DayanaWeb.Client.Pages.Admin.Blog.Posts;
 
 public partial class AddPost
 {
     PostDto model = new();
     List<PostCategoryDto> categoryList = new();
-    private long categorySelectedValue {  get; set; }
+    private long categorySelectedValue { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

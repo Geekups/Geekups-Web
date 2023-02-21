@@ -3,7 +3,6 @@ using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
-using DayanaWeb.Shared.Infrastructure.Routes;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -58,9 +57,10 @@ public class PostController : ControllerBase
 
     [Route(Routes.Post + "update-post")]
     [HttpPut]
-    public async Task UpdatePost([FromBody] PostDto data)
+    public async Task UpdatePost([FromBody] string data)
     {
-        var entity = _mapper.Map<Post>(data);
+        var dto = JsonSerializer.Deserialize<PostDto>(data);
+        var entity = _mapper.Map<Post>(dto);
         _unitOfWork.Posts.Update(entity);
         await _unitOfWork.CommitAsync();
     }

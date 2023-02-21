@@ -3,7 +3,6 @@ using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Common;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
-using DayanaWeb.Shared.Infrastructure.Routes;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 

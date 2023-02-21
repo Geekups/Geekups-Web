@@ -1,0 +1,26 @@
+﻿@page "/post-control-EDSEWHD"
+@using DayanaWeb.Shared.EntityFramework.Entities.Blog;
+<MudTable ServerData="@(new Func<TableState, Task<TableData<Post>>>(ServerReload))"
+          Hover="true" @ref="table" Bordered="true"
+          OnCommitEditClick="@(() => OnCommitEdit())">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Post</MudText>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Category Name">@context.Name</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(()=>OnDelete(context.Id))"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(()=>Edit(context.Id))"></MudIconButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
