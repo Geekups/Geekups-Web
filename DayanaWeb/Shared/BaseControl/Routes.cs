@@ -1,4 +1,4 @@
-﻿namespace DayanaWeb.Shared.Infrastructure.Routes;
+﻿namespace DayanaWeb.Shared.BaseControl;
 
 public static class Routes
 {

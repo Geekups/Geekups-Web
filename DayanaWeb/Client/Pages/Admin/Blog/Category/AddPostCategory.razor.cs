@@ -1,5 +1,5 @@
-﻿using DayanaWeb.Shared.EntityFramework.DTO.Blog;
-using DayanaWeb.Shared.Infrastructure.Routes;
+﻿using DayanaWeb.Shared.BaseControl;
+using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Category;
 

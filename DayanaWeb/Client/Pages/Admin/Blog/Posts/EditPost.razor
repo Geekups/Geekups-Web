@@ -1,0 +1,21 @@
+﻿@page "/p-p-edit/{Id}"
+
+<MudContainer Class="object-center">
+    <MudForm>
+        <MudSelect T="long" @bind-Value="categorySelectedValue" Label="please choose the category">
+            @{
+                foreach (var pcd in categoryList)
+                {
+                    <MudSelectItem T="long" Value="pcd.Id">@pcd.Name</MudSelectItem>
+                }
+            }
+        </MudSelect>
+        <MudTextField T="string" Label="Post Name" Required="true" RequiredError="pn is required!" @bind-Value="model.Name" />
+        <MudTextField T="string" Label="Post Auth" Required="true" RequiredError="pn is required!" @bind-Value="model.Author" />
+        <MudTextField T="string" Label="Post Description" Required="true" RequiredError="pn is required!" @bind-Value="model.Description" Lines="5" />
+        <MudTextField T="string" Label="Post Content" Required="true" RequiredError="pn is required!" @bind-Value="model.Content" Lines="10" />
+    </MudForm>
+    <MudButton @onclick="OnEdit">
+        Edit post
+    </MudButton>
+</MudContainer>
