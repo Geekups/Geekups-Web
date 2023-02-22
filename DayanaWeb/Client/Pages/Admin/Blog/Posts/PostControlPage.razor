@@ -10,10 +10,12 @@
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
+        <MudTh>Author</MudTh>
         <MudTh>Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Category Name">@context.Name</MudTd>
+        <MudTd DataLabel="Post Name">@context.Name</MudTd>
+        <MudTd DataLabel="Author Name">@context.Author</MudTd>
         <MudTd DataLabel="Actions">
             <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(()=>OnDelete(context.Id))"></MudIconButton>
             <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(()=>Edit(context.Id))"></MudIconButton>

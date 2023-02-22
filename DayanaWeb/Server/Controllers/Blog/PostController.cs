@@ -38,12 +38,11 @@ public class PostController : ControllerBase
     }
 
     [Route(Routes.Post + "get-post-list-by-filter")]
-    [HttpGet]
-    public async Task<List<PostDto>> GetPostListByFilter([FromBody] DefaultPaginationFilter data)
+    [HttpPost]
+    public async Task<PaginatedList<Post>> GetPostListByFilter([FromBody] string data)
     {
-        var entityList = await _unitOfWork.Posts.GetPostsByFilterAsync(data);
-        var dtoList = _mapper.Map<List<PostDto>>(entityList);
-        return dtoList;
+        var paginationData = JsonSerializer.Deserialize<DefaultPaginationFilter>(data);
+        return await _unitOfWork.Posts.GetPostsByFilterAsync(paginationData ?? throw new NullReferenceException(CustomizedError<DefaultPaginationFilter>.NullRefError().ToString()));
     }
 
     [Route(Routes.Post + "delete-post/{data}")]

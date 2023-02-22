@@ -9,7 +9,7 @@ public interface IPostRepository : IRepository<Post>
 {
     Task<Post> GetPostByIdAsync(long id);
     Task<Post> GetPostByPostNameAsync(string Postname);
-    Task<List<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter);
+    Task<PaginatedList<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter);
 }
 
 public class PostRepository : Repository<Post>, IPostRepository
@@ -42,7 +42,7 @@ public class PostRepository : Repository<Post>, IPostRepository
         return data;
     }
 
-    public async Task<List<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter)
+    public async Task<PaginatedList<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter)
     {
         var query = _queryable;
         query = query.AsNoTracking();
@@ -50,7 +50,16 @@ public class PostRepository : Repository<Post>, IPostRepository
         query = query.ApplyFilter(filter);
         query = query.ApplySort(filter.SortBy);
 
-        return await query.Paginate(filter.Page, filter.PageSize).ToListAsync();
+        //var dataTotalCount = _queryable.Count();
+
+        return new PaginatedList<Post>()
+        {
+            Data = await query.Paginate(filter.Page, filter.PageSize).ToListAsync(),
+            //TotalCount = dataTotalCount,
+            //TotalPages = (int)Math.Ceiling((decimal)dataTotalCount / (decimal)filter.PageSize),
+            Page = filter.Page,
+            PageSize = filter.PageSize
+        };
     }
 }
 

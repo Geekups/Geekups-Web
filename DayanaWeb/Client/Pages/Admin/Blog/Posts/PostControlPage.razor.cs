@@ -18,13 +18,13 @@ public partial class PostControlPage
     private async Task<TableData<Post>> ServerReload(TableState state)
     {
         DefaultPaginationFilter paginationFilter = new(state.Page, state.PageSize);
-        var paginatedData = await _httpService.GetPagedValue<Post>(Routes.Post + "get-post-category-list-by-filter", paginationFilter);
+        var paginatedData = await _httpService.GetPagedValue<Post>(Routes.Post + "get-post-list-by-filter", paginationFilter);
         pagedData = paginatedData.Data;
         return new TableData<Post>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
     private async Task OnDelete(long id)
     {
-        await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post-category/{id}");
+        await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
     }
     private void OnSearch(string text)
     {
@@ -34,6 +34,6 @@ public partial class PostControlPage
 
     private void Edit(long id)
     {
-        _navigationManager.NavigateTo($"/cp-pc-edit/{id}");
+        _navigationManager.NavigateTo($"/p-p-edit/{id}");
     }
 }
