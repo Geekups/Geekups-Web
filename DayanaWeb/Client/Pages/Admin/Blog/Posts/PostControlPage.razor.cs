@@ -22,11 +22,6 @@ public partial class PostControlPage
         pagedData = paginatedData.Data;
         return new TableData<Post>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
-
-    private async Task OnCommitEdit()
-    {
-        await _httpService.PutValue(Routes.Post + "", selectedItem);
-    }
     private async Task OnDelete(long id)
     {
         await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post-category/{id}");

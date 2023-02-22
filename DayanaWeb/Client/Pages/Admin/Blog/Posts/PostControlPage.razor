@@ -1,8 +1,7 @@
 ﻿@page "/post-control-EDSEWHD"
 @using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 <MudTable ServerData="@(new Func<TableState, Task<TableData<Post>>>(ServerReload))"
-          Hover="true" @ref="table" Bordered="true"
-          OnCommitEditClick="@(() => OnCommitEdit())">
+          Hover="true" @ref="table" Bordered="true">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Post</MudText>
         <MudSpacer />
