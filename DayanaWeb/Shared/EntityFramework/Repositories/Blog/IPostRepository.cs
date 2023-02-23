@@ -50,13 +50,13 @@ public class PostRepository : Repository<Post>, IPostRepository
         query = query.ApplyFilter(filter);
         query = query.ApplySort(filter.SortBy);
 
-        //var dataTotalCount = _queryable.Count();
+        var dataTotalCount = _queryable.Count();
 
         return new PaginatedList<Post>()
         {
             Data = await query.Paginate(filter.Page, filter.PageSize).ToListAsync(),
-            //TotalCount = dataTotalCount,
-            //TotalPages = (int)Math.Ceiling((decimal)dataTotalCount / (decimal)filter.PageSize),
+            TotalCount = dataTotalCount,
+            TotalPages = (int)Math.Ceiling((decimal)dataTotalCount / (decimal)filter.PageSize),
             Page = filter.Page,
             PageSize = filter.PageSize
         };
