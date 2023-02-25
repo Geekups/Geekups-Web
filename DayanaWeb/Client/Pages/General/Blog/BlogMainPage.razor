@@ -4,15 +4,19 @@
 <MudSpacer />
 <MudGrid>
     @{
-        foreach (var post in model)
-        {
-            <MudItem lg="2" xl="2" md="1" sm="1" xs="1">
-                <MudText Typo="Typo.h1">@post.Name</MudText>
-                <MudSpacer />
-                <MudText Typo="Typo.caption">@post.Description</MudText>
-            </MudItem>
-        }
+        //void ShapePage()
+        //{
+            foreach (var post in model)
+            {
+                <MudItem lg="2" xl="2" md="1" sm="1" xs="1">
+                    <MudText Typo="Typo.h1">@post.Name</MudText>
+                    <MudSpacer />
+                    <MudText Typo="Typo.caption">@post.Description</MudText>
+                </MudItem>
+            }
+        //}
+        //ShapePage();
     }
 </MudGrid>
 
-<MudPagination Color="Color.Primary" Count="_totalPagesCount" @bind-Selected="@_selected" BoundaryCount="2" MiddleCount="3" />
+<MudPagination Color="Color.Primary" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3" />
