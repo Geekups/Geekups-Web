@@ -28,4 +28,9 @@ public partial class BlogMainPage
         _selected = pageNumber;
         await GetPostDtosAsync();
     }
+
+    private void OnReadMoreButtonClicked(long id)
+    {
+        _navigationManager.NavigateTo($"/blog-post-page/{id}");
+    }
 }

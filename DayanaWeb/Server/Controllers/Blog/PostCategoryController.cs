@@ -38,7 +38,7 @@ public class PostCategoryController : ControllerBase
         return dtoList;
     }
 
-    [Route(Routes.PostCategory + "get-post-category/{data}")]
+    [Route(Routes.PostCategory + "get-post-category/{data:long}")]
     [HttpGet]
     public async Task<PostCategoryDto> GetPostCategory([FromRoute] long data)
     {

@@ -1,22 +1,19 @@
 ﻿@page "/dayana-blog"
 <h3>BlogMainPage</h3>
 
-<MudSpacer />
-<MudGrid>
+<MudSpacer/>
+<MudGrid Spacing="2" Justify="Justify.Center">
     @{
-        //void ShapePage()
-        //{
-            foreach (var post in model)
-            {
-                <MudItem lg="2" xl="2" md="1" sm="1" xs="1">
-                    <MudText Typo="Typo.h1">@post.Name</MudText>
-                    <MudSpacer />
-                    <MudText Typo="Typo.caption">@post.Description</MudText>
-                </MudItem>
-            }
-        //}
-        //ShapePage();
+        foreach (var post in model)
+        {
+            <MudItem  lg="6" xl="6" md="12" sm="12" xs="12" >
+                <MudText Typo="Typo.h1">@post.Name</MudText>
+                <MudSpacer/>
+                <MudText Typo="Typo.caption">@post.Description</MudText>
+                <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(post.Id))">Read More</MudButton>
+            </MudItem>
+        }
     }
 </MudGrid>
 
-<MudPagination Color="Color.Primary" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3" />
+<MudPagination Color="Color.Primary" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3"/>
