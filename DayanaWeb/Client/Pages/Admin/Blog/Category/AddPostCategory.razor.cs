@@ -13,7 +13,7 @@ public partial class AddPostCategory
     public async Task Add()
     {
         var response = await _httpService.PostValue(Routes.PostCategory + "add-post-category", model);
-        if (response.StatusCode == HttpStatusCode.Created)
+        if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Post Category Created Succesfully", Severity.Success);
         }

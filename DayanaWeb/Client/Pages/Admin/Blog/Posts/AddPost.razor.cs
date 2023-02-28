@@ -21,7 +21,7 @@ public partial class AddPost
     {
         model.PostCategoryId = categorySelectedValue;
         var response = await _httpService.PostValue(Routes.Post + "add-post", model);
-        if (response.StatusCode == HttpStatusCode.Created)
+        if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Post Created Succesfully", Severity.Success);
         }
