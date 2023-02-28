@@ -1,6 +1,5 @@
 ﻿using MudBlazor;
-using static MudBlazor.CategoryTypes;
-using System.Net.Http;
+using System.Net;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using DayanaWeb.Shared.BaseControl;
 
@@ -27,7 +26,15 @@ public partial class PostCategoryPage
 
     private async Task OnDelete(long id)
     {
-        await _httpService.DeleteValue<PostCategory>(Routes.PostCategory + $"delete-post-category/{id}");
+        var response = await _httpService.DeleteValue<PostCategory>(Routes.PostCategory + $"delete-post-category/{id}");
+        if(response.StatusCode == HttpStatusCode.OK)
+        {
+            _snackbar.Add("Post Category Deleted Succesfully", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("Operation Failed",Severity.Error);
+        }
     }
     private void OnSearch(string text)
     {

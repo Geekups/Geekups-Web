@@ -1,5 +1,8 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using Azure;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
+using MudBlazor;
+using System.Net;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Posts;
 
@@ -17,6 +20,14 @@ public partial class AddPost
     protected async Task Add()
     {
         model.PostCategoryId = categorySelectedValue;
-        await _httpService.PostValue(Routes.Post + "add-post", model);
+        var response = await _httpService.PostValue(Routes.Post + "add-post", model);
+        if (response.StatusCode == HttpStatusCode.Created)
+        {
+            _snackbar.Add("Post Created Succesfully", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("Operation Failed", Severity.Error);
+        }
     }
 }

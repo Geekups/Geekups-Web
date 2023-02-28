@@ -1,6 +1,8 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using Azure;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using MudBlazor;
+using System.Net;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Posts;
 
@@ -24,7 +26,15 @@ public partial class PostControlPage
     }
     private async Task OnDelete(long id)
     {
-        await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
+        var response = await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            _snackbar.Add("Post Deleted Succesfully", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("Operation Failed", Severity.Error);
+        }
     }
     private void OnSearch(string text)
     {

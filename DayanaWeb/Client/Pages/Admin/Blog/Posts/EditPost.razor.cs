@@ -1,6 +1,9 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using Azure;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using System.Net;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Posts;
 
@@ -19,6 +22,14 @@ public partial class EditPost
 
     private async Task OnEdit()
     {
-        await _httpService.PutValue(Routes.Post + "update-post", model);
+        var response = await _httpService.PutValue(Routes.Post + "update-post", model);
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            _snackbar.Add("Post Updated Succesfully", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("Operation Failed", Severity.Error);
+        }
     }
 }

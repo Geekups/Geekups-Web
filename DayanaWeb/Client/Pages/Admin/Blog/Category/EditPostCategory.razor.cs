@@ -1,6 +1,9 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using Azure;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using System.Net;
 
 namespace DayanaWeb.Client.Pages.Admin.Blog.Category;
 
@@ -16,6 +19,14 @@ public partial class EditPostCategory
 
     private async Task OnEdit()
     {
-        await _httpService.PutValue(Routes.PostCategory + "update-post-category", model);
+        var response = await _httpService.PutValue(Routes.PostCategory + "update-post-category", model);
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            _snackbar.Add("Post Category Updated Succesfully", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("Operation Failed", Severity.Error);
+        }
     }
 }
