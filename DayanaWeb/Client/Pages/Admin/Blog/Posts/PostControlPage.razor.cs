@@ -1,6 +1,8 @@
 ﻿using Azure;
+using DayanaWeb.Client.Shared;
 using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
+using Microsoft.Extensions.Options;
 using MudBlazor;
 using System.Net;
 
@@ -26,8 +28,18 @@ public partial class PostControlPage
     }
     private async Task OnDelete(long id)
     {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+        var result = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
+
         var response = await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
-        if (response.StatusCode == HttpStatusCode.OK)
+        await SnackBarHandler(response);
+    }
+    public async Task SnackBarHandler(HttpResponseMessage httpResponse)
+    {
+        if (httpResponse.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Post Deleted Succesfully", Severity.Success);
         }

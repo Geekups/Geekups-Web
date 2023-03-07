@@ -44,22 +44,30 @@ public class PostRepository : Repository<Post>, IPostRepository
 
     public async Task<PaginatedList<Post>> GetPostsByFilterAsync(DefaultPaginationFilter filter)
     {
-        var query = _queryable;
-        query = query.AsNoTracking();
-
-        query = query.ApplyFilter(filter);
-        query = query.ApplySort(filter.SortBy);
-
-        var dataTotalCount = _queryable.Count();
-
-        return new PaginatedList<Post>()
+        try
         {
-            Data = await query.Paginate(filter.Page, filter.PageSize).ToListAsync(),
-            TotalCount = dataTotalCount,
-            TotalPages = (int)Math.Ceiling((decimal)dataTotalCount / (decimal)filter.PageSize),
-            Page = filter.Page,
-            PageSize = filter.PageSize
-        };
+            var query = _queryable;
+            query = query.AsNoTracking();
+
+            query = query.ApplyFilter(filter);
+            query = query.ApplySort(filter.SortBy);
+
+            var dataTotalCount = _queryable.Count();
+
+            return new PaginatedList<Post>()
+            {
+                Data = await query.Paginate(filter.Page, filter.PageSize).ToListAsync(),
+                TotalCount = dataTotalCount,
+                TotalPages = (int)Math.Ceiling((decimal)dataTotalCount / (decimal)filter.PageSize),
+                Page = filter.Page,
+                PageSize = filter.PageSize
+            };
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 }
 
