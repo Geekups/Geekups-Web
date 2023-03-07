@@ -32,21 +32,17 @@ public partial class PostControlPage
         parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
         parameters.Add("ButtonText", "Delete");
         parameters.Add("Color", Color.Error);
-        var result = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
+        //var result = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
 
         var response = await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
-        await SnackBarHandler(response);
-    }
-    public async Task SnackBarHandler(HttpResponseMessage httpResponse)
-    {
-        if (httpResponse.StatusCode == HttpStatusCode.OK)
-        {
+        //if (response.StatusCode == HttpStatusCode.OK)
+        //{
             _snackbar.Add("Post Deleted Succesfully", Severity.Success);
-        }
-        else
-        {
+        //}
+        //else
+        //{
             _snackbar.Add("Operation Failed", Severity.Error);
-        }
+        //}
     }
     private void OnSearch(string text)
     {
