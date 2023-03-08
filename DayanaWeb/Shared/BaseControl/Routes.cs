@@ -6,6 +6,7 @@ public static class Routes
 
     public const string Post = Api + "post/";
     public const string PostCategory = Api + "post_category/";
+    public const string PostFeedback = Api + "post_feedback/";
     public const string PostIssue = Api + "post_issue/";
     public const string PostCategoryIssue = Api + "post_category_issue/";
     public const string PostComment = Api + "post_comment/";

@@ -10,5 +10,6 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<Post, PostDto>().ReverseMap();
         CreateMap<PostCategory, PostCategoryDto>().ReverseMap();
+        CreateMap<PostFeedBack, PostFeedBackDto>().ReverseMap();
     }
 }
