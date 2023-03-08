@@ -8,7 +8,7 @@ public class UnitOfWork : IUnitOfWork
 
     public IPostRepository Posts { get; }
     public IPostCategoryRepository PostCategories { get; }
-    IPostFeedBackRepository PostFeedBacks { get; }
+    public IPostFeedBackRepository PostFeedBacks { get; }
     public async Task<bool> CommitAsync()
     {
         return await _context.SaveChangesAsync() > 0;

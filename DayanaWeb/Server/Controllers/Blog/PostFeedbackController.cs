@@ -8,11 +8,11 @@ using System.Text.Json;
 
 namespace DayanaWeb.Server.Controllers.Blog;
 
-public class PostFeedbackFeedbackController : ControllerBase
+public class PostFeedbackFeedBackController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public PostFeedbackFeedbackController(IUnitOfWork unitOfWork, IMapper mapper)
+    public PostFeedbackFeedBackController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

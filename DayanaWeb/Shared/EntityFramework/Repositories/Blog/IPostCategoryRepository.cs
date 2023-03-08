@@ -51,7 +51,7 @@ public class PostCategoryRepository : Repository<PostCategory>, IPostCategoryRep
         query = query.ApplyFilter(filter);
         query = query.ApplySort(filter.SortBy);
         var dataTotalCount = _queryable.Count();
-        
+
         return new PaginatedList<PostCategory>()
         {
             Data = await query.Paginate(filter.Page, filter.PageSize).ToListAsync(),

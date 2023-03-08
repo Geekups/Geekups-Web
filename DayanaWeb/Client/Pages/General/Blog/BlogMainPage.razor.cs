@@ -11,7 +11,7 @@ public partial class BlogMainPage
     private int _totalPagesCount = 3;
     protected override async Task OnInitializedAsync()
     {
-        await GetPostDtosAsync();  
+        await GetPostDtosAsync();
     }
 
     private async Task GetPostDtosAsync()
