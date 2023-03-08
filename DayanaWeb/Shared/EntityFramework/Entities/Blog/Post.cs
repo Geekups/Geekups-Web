@@ -13,6 +13,7 @@ public class Post : BaseEntity
 
     public long PostCategoryId { get; set; }
     public PostCategory PostCategory { get; set; }
+    public List<PostFeedBack> PostFeedBacks { get; set; }
 }
 
 public class PostEntityConfiguration : IEntityTypeConfiguration<Post>
