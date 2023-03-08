@@ -9,10 +9,10 @@ public partial class BlogPostPage
     [Parameter]
     public string Id { get; set; }
     PostDto model = new();
-    
+
     protected override async Task OnInitializedAsync()
     {
         model = await _httpService.GetValue<PostDto>(Routes.Post + $"get-post/{Id}");
-       
+
     }
 }

@@ -8,7 +8,7 @@ public class UnitOfWork : IUnitOfWork
 
     public IPostRepository Posts { get; }
     public IPostCategoryRepository PostCategories { get; }
-
+    public IPostFeedBackRepository PostFeedBacks { get; }
     public async Task<bool> CommitAsync()
     {
         return await _context.SaveChangesAsync() > 0;
@@ -24,5 +24,6 @@ public class UnitOfWork : IUnitOfWork
         _context = context;
         Posts = new PostRepository(_context);
         PostCategories = new PostCategoryRepository(_context);
+        PostFeedBacks = new PostFeedBackRepository(_context);
     }
 }

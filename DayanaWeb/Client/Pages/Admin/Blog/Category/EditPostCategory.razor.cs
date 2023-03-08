@@ -1,5 +1,4 @@
-﻿using Azure;
-using DayanaWeb.Shared.BaseControl;
+﻿using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
