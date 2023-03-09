@@ -1,4 +1,5 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using DayanaWeb.Client.Shared;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using MudBlazor;
 
@@ -28,17 +29,24 @@ public partial class PostControlPage
         parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
         parameters.Add("ButtonText", "Delete");
         parameters.Add("Color", Color.Error);
-        //var result = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
-
-        var response = await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
-        //if (response.StatusCode == HttpStatusCode.OK)
-        //{
-        _snackbar.Add("Post Deleted Succesfully", Severity.Success);
-        //}
-        //else
-        //{
-        _snackbar.Add("Operation Failed", Severity.Error);
-        //}
+        var dialogResult = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
+        var dd = await dialogResult.Result;
+        if (dd == DialogResult.Ok(dd))
+        {
+            var response = await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                _snackbar.Add("Post Deleted Succesfully", Severity.Success);
+            }
+            else
+            {
+                _snackbar.Add("Operation Failed", Severity.Error);
+            }
+        }
+        else
+        {
+            _snackbar.Add("Operation Canceled", Severity.Error);
+        }
     }
     private void OnSearch(string text)
     {
