@@ -7,10 +7,10 @@ public class PostFeedBack : BaseEntity
 {
     public string? CommentText { get; set; }
     // public bool IsReply { get; set; }
-    public bool IsLiked { get; set; }
+   // public bool IsLiked { get; set; }
     #region Navigations
 
-    public int PostId { get; set; }
+    public long PostId { get; set; }
     public Post Post { get; set; }
 
     //public int CommentOwnerId { get; set; }

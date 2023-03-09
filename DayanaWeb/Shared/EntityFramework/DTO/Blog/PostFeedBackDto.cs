@@ -1,9 +1,11 @@
-﻿namespace DayanaWeb.Shared.EntityFramework.DTO.Blog;
-public class PostFeedBackDto
+﻿using DayanaWeb.Shared.EntityFramework.Common;
+
+namespace DayanaWeb.Shared.EntityFramework.DTO.Blog;
+public class PostFeedBackDto:BaseDto
 {
     public string CommentText { get; set; }
     //public bool IsReplyToAnotherComment { get; set; }
-    public bool IsLiked { get; set; }
+    //public bool IsLiked { get; set; }
     #region Navigations
 
     public int PostId { get; set; }
