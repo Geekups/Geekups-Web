@@ -7,7 +7,7 @@ namespace DayanaWeb.Client.Pages.General.Blog;
 public partial class BlogPostPage
 {
     [Parameter]
-    public string Id { get; set; }
+    public long Id { get; set; }
     PostDto model = new();
 
     protected override async Task OnInitializedAsync()

@@ -8,7 +8,7 @@ public class PostFeedBackDto:BaseDto
     //public bool IsLiked { get; set; }
     #region Navigations
 
-    public int PostId { get; set; }
+    public long PostId { get; set; }
     public PostDto PostDto { get; set; }
 
     //public int CommentOwnerId { get; set; }
