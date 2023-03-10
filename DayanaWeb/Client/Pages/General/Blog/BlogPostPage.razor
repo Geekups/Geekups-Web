@@ -1,4 +1,6 @@
-@page "/blog-post-page/{Id}"
+@page "/blog-post-page/{Id:long}"
+
+<AddPostComment  PostId="Id"/>
 
 <MudStack Justify="Justify.Center" Class="mt-3">
     <MudContainer MaxWidth="MaxWidth.ExtraLarge">
@@ -9,3 +11,4 @@
         </MudPaper>
     </MudContainer>
 </MudStack>
+

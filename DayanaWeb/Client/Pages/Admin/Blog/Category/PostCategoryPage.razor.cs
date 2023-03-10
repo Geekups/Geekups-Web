@@ -1,4 +1,5 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using DayanaWeb.Client.Shared;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using MudBlazor;
 using System.Net;
@@ -26,14 +27,29 @@ public partial class PostCategoryPage
 
     private async Task OnDelete(long id)
     {
-        var response = await _httpService.DeleteValue<PostCategory>(Routes.PostCategory + $"delete-post-category/{id}");
-        if (response.StatusCode == HttpStatusCode.OK)
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+        var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
+        var dialogResult = await dialog.Result;
+        if (dialogResult.Canceled == false)
         {
-            _snackbar.Add("Post Category Deleted Succesfully", Severity.Success);
+            var response = await _httpService.DeleteValue<PostCategory>(Routes.PostCategory + $"delete-post-category/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                _snackbar.Add("Post Category Deleted Succesfully", Severity.Success);
+                await table.ReloadServerData();
+            }
+            else
+            {
+                _snackbar.Add("Operation Failed", Severity.Error);
+            }
         }
         else
         {
-            _snackbar.Add("Operation Failed", Severity.Error);
+            _snackbar.Add("Operation Canceled", Severity.Warning);
+
         }
     }
     private void OnSearch(string text)
