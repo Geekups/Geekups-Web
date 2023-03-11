@@ -5,13 +5,13 @@
     <MudContainer MaxWidth="MaxWidth.ExtraLarge">
         <MudPaper Outlined="true">
             <MudExpansionPanels>
-                <MudExpansionPanel Text="Add New Category">
+                <MudExpansionPanel Icon="@Icons.Material.Filled.Add" Text="Add New Category">
                     <AddPostCategory/>
                 </MudExpansionPanel>
             </MudExpansionPanels>
         </MudPaper>
         <MudPaper Outlined="true" Class="mt-3">
-            <MudTable ServerData="@(new Func<TableState, Task<TableData<PostCategory>>>(ServerReload))"
+            <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<PostCategory>>>(ServerReload))"
                       Hover="true" @ref="table" Bordered="true">
                 <ToolBarContent>
                     <MudText Typo="Typo.h6">Post Category</MudText>

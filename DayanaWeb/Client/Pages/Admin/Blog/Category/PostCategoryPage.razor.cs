@@ -12,7 +12,7 @@ public partial class PostCategoryPage
     private MudTable<PostCategory> table;
     private string searchString = "";
     private PostCategory selectedItem = null;
-
+    private bool isBusy = false;
 
     /// <summary>
     /// getting the paged, filtered and ordered data from the server
