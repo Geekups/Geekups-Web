@@ -1,4 +1,5 @@
-﻿using DayanaWeb.Shared.BaseControl;
+﻿using DayanaWeb.Client.Shared;
+using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
 using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using Microsoft.AspNetCore.Components;
@@ -33,5 +34,32 @@ public partial class PostComments
     {
         _selected = pageNumber;
         await GetPostCommentsDtosAsync();
+    }
+    private async Task Delete(long id)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+        var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
+        var dialogResult = await dialog.Result;
+        if (dialogResult.Canceled == false)
+        {
+            var response = await _httpService.DeleteValue(Routes.PostFeedback + $"delete-post-feedback/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                _snackbar.Add("Post Comment Deleted Succesfully", Severity.Success);
+                await GetPostCommentsDtosAsync();
+            }
+            else
+            {
+                _snackbar.Add("Operation Failed", Severity.Error);
+            }
+        }
+        else
+        {
+            _snackbar.Add("Operation Canceled", Severity.Warning);
+
+        }
     }
 }

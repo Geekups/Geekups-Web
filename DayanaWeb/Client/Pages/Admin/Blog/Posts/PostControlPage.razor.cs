@@ -33,7 +33,7 @@ public partial class PostControlPage
         var dialogResult = await dialog.Result;
         if (dialogResult.Canceled == false)
         {
-            var response = await _httpService.DeleteValue<Post>(Routes.Post + $"delete-post/{id}");
+            var response = await _httpService.DeleteValue(Routes.Post + $"delete-post/{id}");
             if (response.IsSuccessStatusCode)
             {
                 _snackbar.Add("Post Deleted Succesfully", Severity.Success);

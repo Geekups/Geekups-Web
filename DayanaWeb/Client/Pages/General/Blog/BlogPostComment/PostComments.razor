@@ -6,7 +6,10 @@
                 foreach (var commnet in model)
                 {
                     <MudItem lg="12" xl="12" md="12" sm="12" xs="12" Class="m-2 border-2 border-primary rounded">
-                        <MudText Class="m-2" Typo="Typo.h5">@commnet.CommentText</MudText>
+                        <MudStack Row>
+                            <MudText Class="m-2" Typo="Typo.h5">@commnet.CommentText</MudText>
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="(()=>Delete(commnet.Id))" />
+                        </MudStack>
                     </MudItem>
                 }
             }
