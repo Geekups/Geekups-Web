@@ -35,7 +35,7 @@ public partial class PostCategoryPage
         var dialogResult = await dialog.Result;
         if (dialogResult.Canceled == false)
         {
-            var response = await _httpService.DeleteValue<PostCategory>(Routes.PostCategory + $"delete-post-category/{id}");
+            var response = await _httpService.DeleteValue(Routes.PostCategory + $"delete-post-category/{id}");
             if (response.IsSuccessStatusCode)
             {
                 _snackbar.Add("Post Category Deleted Succesfully", Severity.Success);

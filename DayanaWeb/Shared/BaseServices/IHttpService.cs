@@ -10,7 +10,7 @@ public interface IHttpService
     Task<HttpResponseMessage> PostValue<T>(string requestUrl, T data);
     Task<HttpResponseMessage> PutValue<T>(string requestUrl, T data);
     //Task<HttpResponseMessage> PatchValue<T>(string requestUrl, T data);
-    Task<HttpResponseMessage> DeleteValue<T>(string requestUrl);
+    Task<HttpResponseMessage> DeleteValue(string requestUrl);
     Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl, DefaultPaginationFilter defaultPaginationFilter);
 }
 
@@ -78,7 +78,7 @@ public class HttpService : IHttpService
 
     #region Delete
 
-    public async Task<HttpResponseMessage> DeleteValue<T>(string requestUrl)
+    public async Task<HttpResponseMessage> DeleteValue(string requestUrl)
     {
         return await _client.DeleteAsync(requestUrl);
     }

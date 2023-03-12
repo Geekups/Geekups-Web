@@ -18,6 +18,7 @@ public partial class AddPostComment
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Post Comment Created Succesfully", Severity.Success);
+            this.StateHasChanged();
         }
         else
         {
