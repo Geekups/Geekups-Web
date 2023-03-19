@@ -50,9 +50,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
+// https://learn.microsoft.com/en-us/aspnet/core/blazor/components/prerendering-and-integration?view=aspnetcore-7.0&pivots=webassembly
 app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.html");
-
+//app.MapFallbackToFile("index.html");
+app.MapRazorPages(); // <- Add this (for prerendering)
+app.MapFallbackToPage("/_Host"); // <- Change method + file (for prerendering)
 app.Run();
