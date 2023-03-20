@@ -3,6 +3,7 @@ using DayanaWeb.Shared.EntityFramework.Common;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +18,25 @@ builder.Services.AddDbContext<DataContext>(options =>
         .GetConnectionString("IllConnection"));
 });
 
+string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+var appName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+
+builder.Configuration.AddJsonFile("appsettings.json")
+            .AddEnvironmentVariables();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+ConfigurationManager configuration = builder.Configuration;
+IWebHostEnvironment environment = builder.Environment;
+string address = configuration.GetValue<string>("urls");
+
+#region builder
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 // register an HttpClient that points to itself
-builder.Services.AddScoped(sp =>
+builder.Services.AddSingleton(sp =>
 {
     // Get the address that the app is currently running at
     var server = sp.GetRequiredService<IServer>();
@@ -28,10 +45,15 @@ builder.Services.AddScoped(sp =>
     return new HttpClient { BaseAddress = new Uri(baseAddress) };
 });
 builder.Services.AddScoped<IHttpService, HttpService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddMvc();
+builder.Services.AddMudServices();
+#endregion
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+#region app
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
@@ -43,17 +65,22 @@ else
     app.UseHsts();
 }
 
+
+// Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+app.UseDeveloperExceptionPage();
+
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
-app.UseRouting();
-
-// https://learn.microsoft.com/en-us/aspnet/core/blazor/components/prerendering-and-integration?view=aspnetcore-7.0&pivots=webassembly
 app.MapRazorPages();
 app.MapControllers();
-//app.MapFallbackToFile("index.html");
+app.UseRouting();
 app.MapRazorPages(); // <- Add this (for prerendering)
 app.MapFallbackToPage("/_Host"); // <- Change method + file (for prerendering)
+
 app.Run();
+
+#endregion
