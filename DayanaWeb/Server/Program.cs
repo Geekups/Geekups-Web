@@ -3,6 +3,7 @@ using DayanaWeb.Shared.EntityFramework.Common;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,33 +19,27 @@ builder.Services.AddDbContext<DataContext>(options =>
         .GetConnectionString("IllConnection"));
 });
 
-string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
-var appName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-
-builder.Configuration.AddJsonFile("appsettings.json")
-            .AddEnvironmentVariables();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-ConfigurationManager configuration = builder.Configuration;
-IWebHostEnvironment environment = builder.Environment;
-string address = configuration.GetValue<string>("urls");
 
 #region builder
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+;
+// register an HttpClient that points to itself
 builder.Services.AddRazorPages();
 // register an HttpClient that points to itself
-builder.Services.AddSingleton(sp =>
+builder.Services.AddSingleton<HttpClient>(sp =>
 {
     // Get the address that the app is currently running at
     var server = sp.GetRequiredService<IServer>();
     var addressFeature = server.Features.Get<IServerAddressesFeature>();
-    var baseAddress = addressFeature.Addresses.First();
+    string baseAddress = addressFeature.Addresses.First();
     return new HttpClient { BaseAddress = new Uri(baseAddress) };
 });
 builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddMvc();
 builder.Services.AddMudServices();
 #endregion
@@ -68,9 +63,6 @@ else
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
-app.UseDeveloperExceptionPage();
-
-app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
@@ -78,9 +70,12 @@ app.UseStaticFiles();
 app.MapRazorPages();
 app.MapControllers();
 app.UseRouting();
-app.MapRazorPages(); // <- Add this (for prerendering)
-app.MapFallbackToPage("/_Host"); // <- Change method + file (for prerendering)
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages(); // <- Add this
+    endpoints.MapFallbackToPage("/_Host"); // <- Change method + file
+});
 app.Run();
 
 #endregion
