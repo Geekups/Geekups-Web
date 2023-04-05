@@ -7,7 +7,7 @@ public class PostFeedBack : BaseEntity
 {
     public string? CommentText { get; set; }
     // public bool IsReply { get; set; }
-   // public bool IsLiked { get; set; }
+    // public bool IsLiked { get; set; }
     #region Navigations
 
     public long PostId { get; set; }
