@@ -1,7 +1,7 @@
 ﻿using DayanaWeb.Shared.EntityFramework.Common;
 
 namespace DayanaWeb.Shared.EntityFramework.DTO.Blog;
-public class PostFeedBackDto:BaseDto
+public class PostFeedBackDto : BaseDto
 {
     public string CommentText { get; set; }
     //public bool IsReplyToAnotherComment { get; set; }

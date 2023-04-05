@@ -1,6 +1,4 @@
-using DayanaWeb.Client;
 using DayanaWeb.Shared.BaseServices;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;

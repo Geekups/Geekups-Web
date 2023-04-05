@@ -1,11 +1,8 @@
 ﻿using DayanaWeb.Client.Shared;
 using DayanaWeb.Shared.BaseControl;
 using DayanaWeb.Shared.EntityFramework.DTO.Blog;
-using DayanaWeb.Shared.EntityFramework.Entities.Blog;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-
-using System.Net;
 
 namespace DayanaWeb.Client.Pages.General.Blog.BlogPostComment;
 
@@ -13,7 +10,7 @@ public partial class PostComments
 {
     [Parameter]
     public string PostId { get; set; }
-    List<PostFeedBackDto> model= new();
+    List<PostFeedBackDto> model = new();
     private int _selected = 1;
     private int _totalPagesCount = 3;
     protected override async Task OnInitializedAsync()
