@@ -1,18 +1,20 @@
 ﻿using DayanaWeb.Server.EntityFramework.Entities.Blog;
 using DayanaWeb.Shared.Basic.Classes;
+using static MudBlazor.CategoryTypes;
 
 namespace DayanaWeb.Server.EntityFramework.Extensions.Blog;
 public static class PostQueryableExtension
 {
     public static IQueryable<Post> ApplyFilter(this IQueryable<Post> query, DefaultPaginationFilter filter)
     {
-        // Filter By id
-        if (filter.Id.HasValue)
-            query = query.Where(x => x.Id == filter.Id.Value);
+        if (!string.IsNullOrEmpty(filter.Keyword))
+            query = query.Where(x => x.Description.ToLower().Contains(filter.Keyword.ToLower().Trim()));
 
-        // Filter By Value
         if (!string.IsNullOrEmpty(filter.StringValue))
-            query = query.Where(x => x.Name.ToLower().Contains(filter.StringValue.ToLower().Trim()));
+            query = query.Where(x => x.Content.ToLower().Contains(filter.StringValue.ToLower().Trim()));
+
+        if (!string.IsNullOrEmpty(filter.Title))
+            query = query.Where(x => x.Name.ToLower().Contains(filter.Title.ToLower().Trim()));
 
         return query;
     }

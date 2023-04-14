@@ -29,7 +29,7 @@ public class DefaultPaginationFilter : PaginationFilter
     public int? IntValue { get; set; }
     public string? StringValue { get; set; }
     public IEnumerable<int>? IntValueList { get; set; }
-    public IEnumerable<int>? StringValueList { get; set; }
+    public IEnumerable<string>? StringValueList { get; set; }
     public string? Title { get; set; }
     public SortByEnum? SortBy { get; set; }
 }

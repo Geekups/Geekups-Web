@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DayanaWeb.Server.EntityFramework.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayanaWeb.Server.EntityFramework.Entities.Blog;
 public class PostFeedBack : BaseEntity
 {
-    public string? CommentText { get; set; }
+    public string CommentText { get; set; }
     // public bool IsReply { get; set; }
     // public bool IsLiked { get; set; }
     #region Navigations

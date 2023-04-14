@@ -6,6 +6,7 @@ namespace DayanaWeb.Server.EntityFramework.Entities.Blog;
 public class PostCategory : BaseEntity
 {
     public string Name { get; set; }
+    public string Description { get; set; }
     public List<Post> Posts { get; set; }
 }
 
