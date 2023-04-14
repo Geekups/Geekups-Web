@@ -6,13 +6,11 @@ public static class PostFeedBackQueryableExtension
 {
     public static IQueryable<PostFeedBack> ApplyFilter(this IQueryable<PostFeedBack> query, DefaultPaginationFilter filter)
     {
-        // Filter By id
-        if (filter.Id.HasValue)
-            query = query.Where(x => x.Id == filter.Id.Value);
+        if (!string.IsNullOrEmpty(filter.Keyword))
+            query = query.Where(x => x.CommentText.ToLower().Contains(filter.Keyword.ToLower().Trim()));
 
-        // Filter By Value
-        if (!string.IsNullOrEmpty(filter.StringValue))
-            query = query.Where(x => (x.CommentText ?? "").ToLower().Contains(filter.StringValue.ToLower().Trim()));
+        //if (!string.IsNullOrEmpty(filter.Title))
+        //    query = query.Where(x => x.Name.ToLower().Contains(filter.Title.ToLower().Trim()));
 
         return query;
     }
