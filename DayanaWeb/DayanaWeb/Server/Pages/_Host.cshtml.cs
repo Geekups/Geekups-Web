@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CustomerMoghimiHome.Server.Pages
+namespace DayanaWeb.Server.Pages
 {
     public class _HostModel : PageModel
     {
